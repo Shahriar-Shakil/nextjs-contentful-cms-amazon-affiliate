@@ -23,7 +23,7 @@ const ProductPage = ({ product, extra }) => {
     content,
     photoGallery,
     price
-  } = product.fields ?? {}
+  } = product?.fields ?? {}
   return (
     <section className='section'>
       {/* {preview && <PreviewAlert />} */}
@@ -77,18 +77,6 @@ const ProductPage = ({ product, extra }) => {
                               height={image.fields.file.details.image.height}
                             />
                           </div>
-                          //   <img
-                          //     key={image.fields.title}
-                          //     src={image.fields.file.url}
-                          //     alt={image.fields.title}
-                          //   className={classNames(
-                          //     i === 0
-                          //       ? 'lg:col-span-2 lg:row-span-2'
-                          //       : 'hidden lg:block',
-                          //     'rounded-lg'
-                          //   )}
-                          //   />
-                          //
                         )
                       })}
                     </div>
@@ -117,10 +105,8 @@ const ProductPage = ({ product, extra }) => {
 }
 
 export const getStaticProps = async ({ params, preview = false }) => {
-  const cfClient = client
-
   const { productSlug } = params
-  const response = await cfClient.getEntries({
+  const response = await client.getEntries({
     content_type: 'product',
     'fields.slug': productSlug
   })
@@ -137,8 +123,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
   return {
     props: {
       product: response?.items?.[0],
-      revalidate: 60,
-      extra: response
+      revalidate: 60
     }
   }
 }
@@ -146,7 +131,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
 export const getStaticPaths = async () => {
   const response = await client.getEntries({ content_type: 'product' })
   const paths = response.items.map(item => ({
-    params: { productSlug: item.fields.slug }
+    params: { productSlug: item?.fields?.slug }
   }))
 
   return {
