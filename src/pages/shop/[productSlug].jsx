@@ -1,12 +1,10 @@
-import PostBody from '@/components/posts/PostBody'
-import PostHeader from '@/components/posts/PostHeader'
 import RichText from '@/components/RichText'
 import ContentfulImage from '@/components/ui/ContentfulImage'
-import PreviewAlert from '@/components/ui/PreviewAlert'
 import PriceComponent from '@/components/ui/PriceComponent'
 import Skeleton from '@/components/ui/Skeleton'
 import { client } from '@/lib/contentful/client'
 import { useRouter } from 'next/router'
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -104,7 +102,7 @@ const ProductPage = ({ product, extra }) => {
   )
 }
 
-export const getStaticProps = async ({ params, preview = false }) => {
+export const getStaticProps = async ({ params }) => {
   const { productSlug } = params
   const response = await client.getEntries({
     content_type: 'product',

@@ -23,7 +23,7 @@ const PostCard = ({ post }) => {
             <DateComponent dateString={date} />
           </div>
           <p className='text-base mb-4'>{excerpt}</p>
-          <Avatar name={author.fields.name} picture={author.fields.picture} />
+          {/* <Avatar name={author.fields.name} picture={author.fields.picture} /> */}
         </div>
       </Link>
     </li>

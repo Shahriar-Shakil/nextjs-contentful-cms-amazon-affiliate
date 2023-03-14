@@ -16,7 +16,7 @@ const Posts = ({ posts }) => {
 }
 
 export const getStaticProps = async () => {
-  const response = await client.getEntries({ content_type: 'post' })
+  const response = await client.getEntries({ content_type: 'blogPost' })
 
   return {
     props: {
