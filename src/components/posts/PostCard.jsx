@@ -22,8 +22,8 @@ const PostCard = ({ post }) => {
           <div className='text-sm mb-4 text-gray-400'>
             <DateComponent dateString={date} />
           </div>
-          <p className='text-base mb-4'>{excerpt}</p>
-          {/* <Avatar name={author.fields.name} picture={author.fields.picture} /> */}
+          <p className='text-base mb-4 line-clamp-4'>{excerpt}</p>
+          <Avatar name={author.fields.name} picture={author.fields.image} />
         </div>
       </Link>
     </li>

@@ -1,7 +1,7 @@
 import PostBody from '@/components/posts/PostBody'
 import PostHeader from '@/components/posts/PostHeader'
 import Skeleton from '@/components/ui/Skeleton'
-import { client, previewClient } from '@/lib/contentful/client'
+import { client } from '@/lib/contentful/client'
 import { useRouter } from 'next/router'
 
 const Post = ({ post }) => {
@@ -31,7 +31,6 @@ export const getStaticProps = async ({ params, preview = false }) => {
     content_type: 'blogPost',
     'fields.slug': slug
   })
-
   if (!response?.items?.length) {
     return {
       redirect: {
