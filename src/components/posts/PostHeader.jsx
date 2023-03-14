@@ -4,7 +4,6 @@ import DateComponent from '../ui/DateComponent'
 
 const PostHeader = ({ post }) => {
   const { title, coverImage, author, date } = post.fields ?? {}
-  console.log(post.fields)
   return (
     <>
       <h2>{title}</h2>
