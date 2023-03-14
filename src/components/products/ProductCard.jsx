@@ -1,16 +1,20 @@
 import Link from 'next/link'
-// import Avatar from '../ui/Avatar'
-// import DateComponent from '../ui/DateComponent'
 import ContentfulImage from '../ui/ContentfulImage'
-import image from '../../../public/product-image.jpg'
 import PriceComponent from '../ui/PriceComponent'
 import CategoriesLink from '../Categories/CategoriesLink'
+import Router from 'next/router'
 const ProductCard = ({ product }) => {
   const { title, slug, affiliateLink, coverImage, categories, price } =
     product.fields ?? {}
-  //   const productThumbnail = images?.[0]
+  const handleClick = e => {
+    e.preventDefault()
+    Router.push(`/shop/${slug}`)
+  }
   return (
-    <div className='rounded overflow-hidden shadow-lg '>
+    <li
+      onClick={handleClick}
+      className='rounded overflow-hidden shadow-lg cursor-pointer'
+    >
       <div className='pb-6 space-y-3'>
         <Link href={`/shop/${slug}`}>
           <div className='aspect-w-2 aspect-h-1 sm:aspect-w-3 sm:aspect-h-2'>
@@ -55,7 +59,7 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       </div>
-    </div>
+    </li>
   )
 }
 

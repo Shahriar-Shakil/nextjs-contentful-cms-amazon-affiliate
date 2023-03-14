@@ -4,13 +4,13 @@ import React from 'react'
 const Layout = ({ children }) => {
   return (
     <>
-      <header className='bg-stone-100 p-8'>
+      <header className='bg-indigo-600 p-2'>
         <nav className='container'>
           <ul className='flex gap-4'>
             <li>
               <Link
                 href='/'
-                className='text-sm font-medium uppercase text-stone-400'
+                className='text-sm font-medium uppercase text-white'
               >
                 Home
               </Link>
@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
             <li>
               <Link
                 href='/shop'
-                className='text-sm font-medium uppercase text-stone-400'
+                className='text-sm font-medium uppercase text-white'
               >
                 Shop
               </Link>
@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
             <li>
               <Link
                 href='/posts'
-                className='text-sm font-medium uppercase text-stone-400'
+                className='text-sm font-medium uppercase text-white'
               >
                 Posts
               </Link>
