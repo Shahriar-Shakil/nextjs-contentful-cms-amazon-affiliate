@@ -1,7 +1,7 @@
 import ProductCard from '@/components/products/ProductCard'
 import { client } from '@/lib/contentful/client'
 
-const Homepage = ({ products }) => {
+const Homepage = ({ products, res }) => {
   return (
     <section className='section'>
       <div className='container'>
@@ -19,6 +19,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       products: response.items,
+      res: response,
       revalidate: 60
     }
   }

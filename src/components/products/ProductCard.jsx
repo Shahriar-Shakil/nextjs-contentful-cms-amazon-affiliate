@@ -1,14 +1,14 @@
 import Link from 'next/link'
+import Router from 'next/router'
+import CategoriesLink from '../Categories/CategoriesLink'
 import ContentfulImage from '../ui/ContentfulImage'
 import PriceComponent from '../ui/PriceComponent'
-import CategoriesLink from '../Categories/CategoriesLink'
-import Router from 'next/router'
 const ProductCard = ({ product }) => {
   const { title, slug, affiliateLink, coverImage, categories, price } =
     product.fields ?? {}
   const handleClick = e => {
     e.preventDefault()
-    Router.push(`/shop/${slug}`)
+    Router.push(`/${slug}`)
   }
   return (
     <li
@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
       className='rounded overflow-hidden shadow-lg cursor-pointer'
     >
       <div className='pb-6 space-y-3'>
-        <Link href={`/shop/${slug}`}>
+        <Link href={`/${slug}`}>
           <div className='aspect-w-2 aspect-h-1 sm:aspect-w-3 sm:aspect-h-2'>
             <ContentfulImage
               className='object-contain'
@@ -35,10 +35,10 @@ const ProductCard = ({ product }) => {
             ) : (
               <></>
             )}
-            <Link href={`/shop/${slug}`}>
+            <Link href={`/${slug}`}>
               <h2
                 title={title}
-                className=' line-clamp-3 h-20  font-normal text-justify text-indigo-600 hover:text-indigo-700 pt-2'
+                className=' line-clamp-3  text-sm font-normal  text-indigo-600 hover:text-indigo-700 pt-2'
               >
                 {title}
               </h2>
