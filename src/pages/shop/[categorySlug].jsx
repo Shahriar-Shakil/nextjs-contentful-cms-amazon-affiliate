@@ -16,7 +16,7 @@ const ShopPage = ({ categories, products }) => {
       ) : (
         <>
           <ul className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
-            {products.map((product, i) => (
+            {sortProduct.map((product, i) => (
               <ProductCard key={product.fields.slug} product={product} />
             ))}
           </ul>
@@ -50,21 +50,6 @@ export const getStaticProps = async ({ params }) => {
       }
     }
   }
-  //   if (!response?.items?.length) {
-  //     return {
-  //       redirect: {
-  //         destination: '/shop',
-  //         permanent: false
-  //       }
-  //     }
-  //   }
-
-  //   return {
-  //     props: {
-  //       category: response.items,
-  //       revalidate: 60
-  //     }
-  //   }
 }
 
 export const getStaticPaths = async () => {

@@ -6,15 +6,13 @@ export default function CategoriesLink({ categories }) {
     <div>
       {categories?.map((category, i) => {
         return (
-          <>
-            <Link
-              key={category.fields?.title}
-              className='capitalize text-xs    text-stone-500'
-              href={`/shop/categories/${category?.fields?.slug}`}
-            >
-              {i ? '|' : ''} {category.fields?.title}
-            </Link>{' '}
-          </>
+          <Link
+            key={category.fields?.title}
+            className='capitalize text-xs    text-stone-500'
+            href={`/shop/categories/${category?.fields?.slug}`}
+          >
+            {i ? '|' : ''} {category.fields?.title}
+          </Link>
         )
       })}
     </div>

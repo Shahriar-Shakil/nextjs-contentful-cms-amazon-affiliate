@@ -8,7 +8,7 @@ const Post = ({ post }) => {
   const router = useRouter()
 
   return (
-    <section className='section'>
+    <section className=''>
       <div className='container'>
         <article className='prose mx-auto'>
           {router.isFallback ? (
