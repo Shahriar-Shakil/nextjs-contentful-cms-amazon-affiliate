@@ -15,6 +15,8 @@ const ShopPage = ({ categories, products }) => {
         <Skeleton />
       ) : (
         <>
+          <p className='mb-12 '>Showing {sortProduct?.length} results</p>
+
           <ul className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
             {sortProduct.map((product, i) => (
               <ProductCard key={product.fields.slug} product={product} />

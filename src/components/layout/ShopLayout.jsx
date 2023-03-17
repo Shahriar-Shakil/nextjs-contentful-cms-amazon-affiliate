@@ -7,7 +7,7 @@ export default function ShopLayout({ categories, children }) {
   return (
     <section className=''>
       <div className=''>
-        <ul className='grid grid-cols-12 gap-4 mt-3 mb-20'>
+        <div className='grid grid-cols-12 gap-4 mt-3 mb-20'>
           <div className='col-span-2'>
             <ul className='mb-10'>
               <li className='py-1 text-base uppercase font-bold tracking-wide'>
@@ -68,7 +68,7 @@ export default function ShopLayout({ categories, children }) {
               </li>
             </ul>
           </div>
-        </ul>
+        </div>
       </div>
     </section>
   )
