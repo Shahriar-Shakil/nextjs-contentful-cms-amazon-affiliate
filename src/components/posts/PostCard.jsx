@@ -8,7 +8,7 @@ const PostCard = ({ post }) => {
 
   return (
     <li className='rounded-md overflow-hidden shadow-md'>
-      <Link href={`/posts/${slug}`} aria-label={title}>
+      <Link href={`/blogs/${slug}`} aria-label={title}>
         <div className='mb-2 fill-current'>
           <ContentfulImage
             alt={`Cover Image for ${title}`}

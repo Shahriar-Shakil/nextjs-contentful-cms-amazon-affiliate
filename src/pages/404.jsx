@@ -2,7 +2,6 @@ import Link from 'next/link'
 import React from 'react'
 
 const PageNotFound = props => {
-  console.log(props)
   return (
     <section className='section'>
       <div className='container'>

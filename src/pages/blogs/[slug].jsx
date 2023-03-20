@@ -1,27 +1,30 @@
+import Layout from '@/components/layout'
 import PostBody from '@/components/posts/PostBody'
 import PostHeader from '@/components/posts/PostHeader'
 import Skeleton from '@/components/ui/Skeleton'
 import { client } from '@/lib/contentful/client'
 import { useRouter } from 'next/router'
 
-const Post = ({ post }) => {
+const Post = ({ post, categories }) => {
   const router = useRouter()
 
   return (
-    <section className=''>
-      <div className='container'>
-        <article className='prose mx-auto'>
-          {router.isFallback ? (
-            <Skeleton />
-          ) : (
-            <>
-              <PostHeader post={post} />
-              <PostBody post={post} />
-            </>
-          )}
-        </article>
-      </div>
-    </section>
+    <Layout categories={categories}>
+      <section className=''>
+        <div className='container'>
+          <article className='prose mx-auto'>
+            {router.isFallback ? (
+              <Skeleton />
+            ) : (
+              <>
+                <PostHeader post={post} />
+                <PostBody post={post} />
+              </>
+            )}
+          </article>
+        </div>
+      </section>
+    </Layout>
   )
 }
 
@@ -30,6 +33,9 @@ export const getStaticProps = async ({ params, preview = false }) => {
   const response = await client.getEntries({
     content_type: 'blogPost',
     'fields.slug': slug
+  })
+  const categoriesResponse = await client.getEntries({
+    content_type: 'clothing'
   })
   if (!response?.items?.length) {
     return {
@@ -43,6 +49,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
   return {
     props: {
       post: response?.items?.[0],
+      categories: categoriesResponse.items,
       revalidate: 60
     }
   }

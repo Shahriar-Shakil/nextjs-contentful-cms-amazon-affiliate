@@ -1,25 +1,30 @@
+import Layout from '@/components/layout'
 import ProductPageContent from '@/components/products/ProductPage'
 import Skeleton from '@/components/ui/Skeleton'
 import { client } from '@/lib/contentful/client'
 import { useRouter } from 'next/router'
 
-const ProductPage = ({ product }) => {
+const ProductPage = ({ product, categories, relatedProducts }) => {
   const router = useRouter()
-
   return (
-    <section className=''>
-      <div className='container'>
-        <article className=''>
-          {router.isFallback ? (
-            <Skeleton />
-          ) : (
-            <>
-              <ProductPageContent product={product} />
-            </>
-          )}
-        </article>
-      </div>
-    </section>
+    <Layout categories={categories}>
+      <section className=''>
+        <div className='container'>
+          <article className=''>
+            {router.isFallback ? (
+              <Skeleton />
+            ) : (
+              <>
+                <ProductPageContent
+                  product={product}
+                  relatedProducts={relatedProducts}
+                />
+              </>
+            )}
+          </article>
+        </div>
+      </section>
+    </Layout>
   )
 }
 
@@ -28,6 +33,14 @@ export const getStaticProps = async ({ params }) => {
   const response = await client.getEntries({
     content_type: 'product',
     'fields.slug': productSlug
+  })
+  const categoriesResponse = await client.getEntries({
+    content_type: 'clothing'
+  })
+  // find related Products by using category IDs
+  let categoryId = response?.items?.[0]?.fields.categories?.[0]?.sys.id
+  let relatedProductResponse = await client.getEntries({
+    links_to_entry: categoryId
   })
 
   if (!response?.items?.length) {
@@ -42,6 +55,8 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       product: response?.items?.[0],
+      categories: categoriesResponse.items,
+      relatedProducts: relatedProductResponse.items,
       revalidate: 60
     }
   }

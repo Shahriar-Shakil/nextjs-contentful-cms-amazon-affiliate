@@ -1,3 +1,4 @@
+import Layout from '@/components/layout'
 import ShopLayout from '@/components/layout/ShopLayout'
 import ProductCard from '@/components/products/ProductCard'
 import Pagination from '@/components/ui/Pagination'
@@ -15,15 +16,17 @@ const ShopPage = ({ categories, products, total }) => {
     router.push(`/shop/pages/${page}`)
   }
   return (
-    <ShopLayout categories={categories}>
-      <p className='mb-12 '>Showing {products?.length} results</p>
-      <ul className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
-        {sortProduct?.map((product, i) => (
-          <ProductCard key={product.fields.slug} product={product} />
-        ))}
-      </ul>
-      <Pagination total={12} currentPage={1} onChange={onChangePagination} />
-    </ShopLayout>
+    <Layout categories={categories}>
+      <ShopLayout categories={categories}>
+        <p className='mb-12 '>Showing {products?.length} results</p>
+        <ul className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
+          {sortProduct?.map((product, i) => (
+            <ProductCard key={product.fields.slug} product={product} />
+          ))}
+        </ul>
+        <Pagination total={12} currentPage={1} onChange={onChangePagination} />
+      </ShopLayout>
+    </Layout>
   )
 }
 export const getStaticProps = async () => {

@@ -1,3 +1,4 @@
+import Layout from '@/components/layout'
 import ShopLayout from '@/components/layout/ShopLayout'
 import ProductCard from '@/components/products/ProductCard'
 import Pagination from '@/components/ui/Pagination'
@@ -6,7 +7,6 @@ import { calculatePages, sortPrice } from '@/lib/utils'
 import { useRouter } from 'next/router'
 
 const ShopPage = ({ categories, products, total }) => {
-  //   console.log(total, limit)
   const router = useRouter()
   const { sort, page } = router.query
   let sortProduct = sort ? sortPrice(products, sort) : products
@@ -15,21 +15,23 @@ const ShopPage = ({ categories, products, total }) => {
     router.push(`/shop/pages/${page}`)
   }
   return (
-    <ShopLayout categories={categories}>
-      <p className='mb-12 '>Showing {products?.length} results</p>
-      <ul className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
-        {sortProduct?.map((product, i) => (
-          <ProductCard key={product.fields.slug} product={product} />
-        ))}
-      </ul>
-      {/* pagination */}
+    <Layout categories={categories}>
+      <ShopLayout categories={categories}>
+        <p className='mb-12 '>Showing {products?.length} results</p>
+        <ul className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
+          {sortProduct?.map((product, i) => (
+            <ProductCard key={product.fields.slug} product={product} />
+          ))}
+        </ul>
+        {/* pagination */}
 
-      <Pagination
-        total={total}
-        currentPage={page}
-        onChange={onChangePagination}
-      />
-    </ShopLayout>
+        <Pagination
+          total={total}
+          currentPage={page}
+          onChange={onChangePagination}
+        />
+      </ShopLayout>
+    </Layout>
   )
 }
 export const getStaticProps = async ({ params }) => {

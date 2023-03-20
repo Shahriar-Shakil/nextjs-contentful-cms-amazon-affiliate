@@ -2,8 +2,9 @@ import React from 'react'
 import RichText from '../RichText'
 import ProductDetails from './ProductDetails'
 import ProductImagesGallery from './ProductImagesGallery'
+import RelatedProducts from './RelatedProducts'
 
-export default function ProductPageContent({ product }) {
+export default function ProductPageContent({ product, relatedProducts }) {
   const { content } = product?.fields ?? {}
   return (
     <div className='mx-auto mt-8 max-w-2xl px-4 pb-16 sm:px-6 sm:pb-24 lg:max-w-7xl lg:px-8'>
@@ -28,6 +29,9 @@ export default function ProductPageContent({ product }) {
             </div>
           </div>
         </div>
+      </div>
+      <div className='mt-10'>
+        <RelatedProducts relatedProducts={relatedProducts} />
       </div>
     </div>
   )

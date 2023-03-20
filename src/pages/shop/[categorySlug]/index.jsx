@@ -1,3 +1,4 @@
+import Layout from '@/components/layout'
 import ShopLayout from '@/components/layout/ShopLayout'
 import ProductCard from '@/components/products/ProductCard'
 import Skeleton from '@/components/ui/Skeleton'
@@ -10,21 +11,23 @@ const ShopPage = ({ categories, products }) => {
   const { sort } = router.query
   let sortProduct = sort ? sortPrice(products, sort) : products
   return (
-    <ShopLayout categories={categories}>
-      {router.isFallback ? (
-        <Skeleton />
-      ) : (
-        <>
-          <p className='mb-12 '>Showing {sortProduct?.length} results</p>
+    <Layout categories={categories}>
+      <ShopLayout categories={categories}>
+        {router.isFallback ? (
+          <Skeleton />
+        ) : (
+          <>
+            <p className='mb-12 '>Showing {sortProduct?.length} results</p>
 
-          <ul className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
-            {sortProduct.map((product, i) => (
-              <ProductCard key={product.fields.slug} product={product} />
-            ))}
-          </ul>
-        </>
-      )}
-    </ShopLayout>
+            <ul className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
+              {sortProduct.map((product, i) => (
+                <ProductCard key={product.fields.slug} product={product} />
+              ))}
+            </ul>
+          </>
+        )}
+      </ShopLayout>
+    </Layout>
   )
 }
 export const getStaticProps = async ({ params }) => {

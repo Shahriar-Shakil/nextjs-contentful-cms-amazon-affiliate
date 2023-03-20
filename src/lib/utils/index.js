@@ -12,7 +12,6 @@ export const sortPrice = (arr, order) => {
 export const calculatePages = totalItem => {
   let limit = process.env.PAGINATION_LIMIT || 6
   let totalPages = Math.ceil(totalItem / limit)
-  console.log(limit)
   return totalPages
 }
 
