@@ -1,40 +1,10 @@
-import Link from 'next/link'
 import React from 'react'
+import Header from './Header'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, categories }) => {
   return (
     <>
-      <header className='bg-indigo-600 p-2'>
-        <nav className='container'>
-          <ul className='flex gap-4'>
-            <li>
-              <Link
-                href='/'
-                className='text-sm font-medium uppercase text-white'
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href='/shop'
-                className='text-sm font-medium uppercase text-white'
-              >
-                Shop
-              </Link>
-            </li>
-            <li>
-              <Link
-                href='/posts'
-                className='text-sm font-medium uppercase text-white'
-              >
-                Posts
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-
+      <Header categories={categories} />
       <main className='container p-8'>{children}</main>
 
       <footer className='bg-stone-100 text-sm font-medium uppercase text-stone-400 px-8 py-4'>

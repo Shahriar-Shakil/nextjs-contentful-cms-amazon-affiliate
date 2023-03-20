@@ -9,3 +9,13 @@ export const sortPrice = (arr, order) => {
     return arr?.sort((a, b) => (a.fields.price > b.fields.price ? -1 : 1))
   }
 }
+export const calculatePages = totalItem => {
+  let limit = process.env.PAGINATION_LIMIT || 6
+  let totalPages = Math.ceil(totalItem / limit)
+  console.log(limit)
+  return totalPages
+}
+
+export const classNames = (...classes) => {
+  return classes.filter(Boolean).join(' ')
+}

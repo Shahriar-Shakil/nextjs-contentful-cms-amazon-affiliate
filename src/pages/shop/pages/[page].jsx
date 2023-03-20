@@ -2,13 +2,13 @@ import ShopLayout from '@/components/layout/ShopLayout'
 import ProductCard from '@/components/products/ProductCard'
 import Pagination from '@/components/ui/Pagination'
 import { client } from '@/lib/contentful/client'
-import { sortPrice } from '@/lib/utils'
+import { calculatePages, sortPrice } from '@/lib/utils'
 import { useRouter } from 'next/router'
 
 const ShopPage = ({ categories, products, total }) => {
+  //   console.log(total, limit)
   const router = useRouter()
-  const { sort } = router.query
-
+  const { sort, page } = router.query
   let sortProduct = sort ? sortPrice(products, sort) : products
 
   let onChangePagination = page => {
@@ -22,16 +22,24 @@ const ShopPage = ({ categories, products, total }) => {
           <ProductCard key={product.fields.slug} product={product} />
         ))}
       </ul>
-      <Pagination total={12} currentPage={1} onChange={onChangePagination} />
+      {/* pagination */}
+
+      <Pagination
+        total={total}
+        currentPage={page}
+        onChange={onChangePagination}
+      />
     </ShopLayout>
   )
 }
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ params }) => {
+  const { page } = params
   try {
     const response = await client.getEntries({ content_type: 'clothing' })
     const productResponse = await client.getEntries({
       content_type: 'product',
-      limit: process.env.PAGINATION_LIMIT
+      limit: process.env.PAGINATION_LIMIT,
+      skip: process.env.PAGINATION_LIMIT * (page - 1)
     })
     return {
       props: {
@@ -42,10 +50,25 @@ export const getStaticProps = async () => {
       }
     }
   } catch (error) {
-    console.log(error)
     return {
-      notFound: true
+      redirect: {
+        destination: '/shop',
+        permanent: false
+      }
     }
+  }
+}
+export const getStaticPaths = async () => {
+  const productResponse = await client.getEntries({
+    content_type: 'product'
+  })
+  let totalPages = calculatePages(productResponse.total)
+  let paths = Array.from({ length: totalPages }).map((e, idx) => {
+    return { params: { page: (1 + idx).toString() } }
+  })
+  return {
+    paths,
+    fallback: false
   }
 }
 export default ShopPage

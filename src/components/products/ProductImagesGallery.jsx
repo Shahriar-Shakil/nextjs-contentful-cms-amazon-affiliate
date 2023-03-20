@@ -1,8 +1,6 @@
 import React from 'react'
 import ContentfulImage from '../ui/ContentfulImage'
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+import { classNames } from '@/lib/utils'
 export default function ProductImagesGallery({ product }) {
   const { photoGallery } = product?.fields ?? {}
   return (
