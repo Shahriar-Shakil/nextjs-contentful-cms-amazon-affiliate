@@ -5,9 +5,9 @@ import Skeleton from '@/components/ui/Skeleton'
 import { client } from '@/lib/contentful/client'
 import { useRouter } from 'next/router'
 
-const Post = ({ post, categories }) => {
+const Post = ({ post, categories, includes }) => {
   const router = useRouter()
-
+  console.log(post)
   return (
     <Layout categories={categories}>
       <section className=''>

@@ -6,6 +6,7 @@ import RelatedProducts from './RelatedProducts'
 
 export default function ProductPageContent({ product, relatedProducts }) {
   const { content } = product?.fields ?? {}
+
   return (
     <div className='mx-auto mt-8 max-w-2xl px-4 pb-16 sm:px-6 sm:pb-24 lg:max-w-7xl lg:px-8'>
       <div className='lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8'>

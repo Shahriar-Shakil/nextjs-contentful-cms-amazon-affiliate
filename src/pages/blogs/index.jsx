@@ -1,6 +1,8 @@
 import { client } from '@/lib/contentful/client'
-import PostCard from '@/components/posts/PostCard'
 import Layout from '@/components/layout'
+import BlogCard from '@/components/posts/BlogCard'
+import { motion } from 'framer-motion'
+import { staggerContainer } from '@/variants'
 
 const Posts = ({ posts, categories }) => {
   return (
@@ -9,7 +11,15 @@ const Posts = ({ posts, categories }) => {
         <div className='container'>
           <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 sm:gap-10'>
             {posts.map((post, i) => (
-              <PostCard key={post.fields.slug} post={post} />
+              <motion.div
+                variants={staggerContainer(i)}
+                initial='initial'
+                whileInView='whileInView'
+                viewport={{ once: true }}
+                key={post.fields.slug}
+              >
+                <BlogCard post={post} />
+              </motion.div>
             ))}
           </ul>
         </div>

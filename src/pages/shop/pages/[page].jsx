@@ -5,6 +5,8 @@ import Pagination from '@/components/ui/Pagination'
 import { client } from '@/lib/contentful/client'
 import { calculatePages, sortPrice } from '@/lib/utils'
 import { useRouter } from 'next/router'
+import { motion } from 'framer-motion'
+import { staggerContainer } from '@/variants'
 
 const ShopPage = ({ categories, products, total }) => {
   const router = useRouter()
@@ -20,7 +22,15 @@ const ShopPage = ({ categories, products, total }) => {
         <p className='mb-12 '>Showing {products?.length} results</p>
         <ul className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
           {sortProduct?.map((product, i) => (
-            <ProductCard key={product.fields.slug} product={product} />
+            <motion.div
+              variants={staggerContainer(i)}
+              initial='initial'
+              whileInView='whileInView'
+              viewport={{ once: true }}
+              key={product.fields.slug}
+            >
+              <ProductCard key={product.fields.slug} product={product} />
+            </motion.div>
           ))}
         </ul>
         {/* pagination */}
